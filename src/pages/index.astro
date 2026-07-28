@@ -1,0 +1,16 @@
+---
+import HomePage from '~/components/pages/HomePage.astro'
+import { getHomepageContent } from '~/data/homepage'
+import { defaultLocale } from '~/data/site'
+import Layout from '~/layouts/Layout.astro'
+
+const content = getHomepageContent(defaultLocale)
+---
+
+<Layout
+  lang={content.locale}
+  title={content.metaTitle}
+  description={content.metaDescription}
+>
+  <HomePage content={content} pathname={Astro.url.pathname} />
+</Layout>

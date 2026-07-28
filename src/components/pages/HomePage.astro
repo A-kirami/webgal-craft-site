@@ -1,0 +1,31 @@
+---
+import DownloadSection from '~/components/homepage/DownloadSection.astro'
+import FaqSection from '~/components/homepage/FaqSection.astro'
+import FeaturesSection from '~/components/homepage/FeaturesSection.astro'
+import HeroSection from '~/components/homepage/HeroSection.astro'
+import SiteFooter from '~/components/homepage/SiteFooter.astro'
+import SiteHeader from '~/components/homepage/SiteHeader.astro'
+import WorkflowSection from '~/components/homepage/WorkflowSection.astro'
+import { getDownloadOptions } from '~/data/downloads'
+import { type HomepageContent } from '~/data/homepage'
+
+interface Props {
+  content: HomepageContent
+  pathname: string
+}
+
+const { content, pathname } = Astro.props
+const downloadOptions = getDownloadOptions(content.locale)
+---
+
+<div class="homepage">
+  <SiteHeader content={content} pathname={pathname} />
+  <main id="top">
+    <HeroSection content={content.hero} download={content.download} downloadOptions={downloadOptions} />
+    <WorkflowSection content={content.workflow} />
+    <FeaturesSection content={content.features} />
+    <DownloadSection content={content.download} downloadOptions={downloadOptions} locale={content.locale} />
+    <FaqSection content={content.faq} />
+    <SiteFooter content={content.footer} />
+  </main>
+</div>

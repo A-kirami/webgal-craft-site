@@ -1,0 +1,43 @@
+---
+import HeaderControls from '~/components/islands/HeaderControls.svelte'
+import { getLocaleOptions, type HomepageContent } from '~/data/homepage'
+import { siteMetadata } from '~/data/site'
+
+import BrandLink from './BrandLink.astro'
+
+
+interface Props {
+  content: HomepageContent
+  pathname: string
+}
+
+const { content, pathname } = Astro.props
+const navLinks = [
+  { href: '#workflow', label: content.nav.workflow },
+  { href: '#features', label: content.nav.features },
+  { href: '#download', label: content.nav.download },
+  { href: '#faq', label: content.nav.faq },
+] as const
+---
+
+<header class="site-header">
+  <nav class="site-header__nav" aria-label={content.controls.primaryNavigation}>
+    <BrandLink />
+
+    <div class="site-header__links">
+      {navLinks.map(link => (
+        <a class="site-header__link" href={link.href}>
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <HeaderControls
+      client:load
+      currentLabel={content.languageLabel}
+      labels={content.controls}
+      locales={getLocaleOptions(pathname)}
+      githubUrl={siteMetadata.githubUrl}
+    />
+  </nav>
+</header>

@@ -1,0 +1,454 @@
+/* ---------- Header controls ---------- */
+.header-controls {
+  display: flex;
+  gap: 0.375rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.language-switcher {
+  position: relative;
+}
+
+.language-menu {
+  position: absolute;
+  top: calc(100% + 0.625rem);
+  right: 0;
+  z-index: 30;
+  display: grid;
+  gap: 0.1875rem;
+  min-width: 10rem;
+  padding: 0.3rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-menu);
+  animation: menu-in 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.language-menu__item {
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  padding-inline: 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  border-radius: var(--radius-sm);
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.language-menu__item:hover {
+  color: var(--color-text);
+  background: var(--color-control-hover-bg);
+}
+
+.language-menu__item[aria-current="page"] {
+  color: var(--color-text);
+  background: var(--color-control-active-bg);
+}
+
+.language-menu__item[aria-current="page"]:hover {
+  background: var(--color-control-hover-bg);
+}
+
+.language-label {
+  display: none;
+  max-width: 4.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Hero download picker ---------- */
+.hero-picker {
+  position: relative;
+  z-index: 8;
+}
+
+.hero-picker__actions {
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+/* 夜场里 CTA 立在落地光斑中，带一圈暖辉光 */
+:root[data-theme="dark"] .hero-picker__actions {
+  box-shadow: 0 0 60px oklch(85% 0.08 85deg / 22%);
+}
+
+.download-button {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  height: var(--control-height);
+  padding-inline: var(--control-padding-x);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-on-ink);
+  background: var(--color-ink);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.download-button:hover,
+.hero-picker__menu-button:hover {
+  background: var(--color-ink-hover);
+}
+
+.download-button:active,
+.hero-picker__menu-button:active {
+  background: var(--color-ink-active);
+}
+
+.hero-picker__download span:last-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.hero-picker__menu-button {
+  display: inline-grid;
+  place-items: center;
+  width: 2.5rem;
+  height: var(--control-height);
+  color: var(--color-on-ink);
+  background: var(--color-ink);
+  border: 1px solid transparent;
+  border-left: 1px solid color-mix(in oklab, var(--color-on-ink) 24%, transparent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  transition: background-color 160ms ease;
+}
+
+.hero-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  z-index: 30;
+  display: grid;
+  gap: 0.1875rem;
+  width: 100%;
+  padding: 0.3rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-menu);
+  animation: menu-in 160ms ease;
+}
+
+.hero-menu__item {
+  display: flex;
+  gap: 0.625rem;
+  align-items: center;
+  padding: 0.375rem 0.625rem;
+  color: var(--color-text-soft);
+  border-radius: var(--radius-sm);
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.hero-menu__item:hover {
+  color: var(--color-text);
+  background: var(--color-control-hover-bg);
+}
+
+.hero-menu__item--selected {
+  color: var(--color-text);
+  background: var(--color-control-active-bg);
+}
+
+.hero-menu__copy {
+  display: grid;
+  gap: 0.0625rem;
+  text-align: left;
+}
+
+.hero-menu__label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.hero-menu__description {
+  font-size: 0.75rem;
+  line-height: 1.25;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Download panel ---------- */
+.panel-picker {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 32rem;
+  margin-inline: auto;
+}
+
+.panel-platforms {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-inline: auto;
+}
+
+.panel-platform {
+  display: inline-flex;
+  gap: 0.4375rem;
+  align-items: center;
+  height: 2.25rem;
+  padding-inline: 1rem;
+  font-size: 0.8125rem;
+  font-weight: 550;
+  color: var(--color-text-soft);
+  background: transparent;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.panel-platform:hover {
+  color: var(--color-text);
+  border-color: color-mix(in oklab, var(--light-key) 35%, var(--color-border-strong));
+}
+
+.panel-platform--selected,
+.panel-platform--selected:hover {
+  color: var(--color-on-ink);
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+/* 舞台上的道具：实底面板被追光照亮，暖 rim 描边 + 辉光 */
+.panel-download {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  min-width: 0;
+  padding: 1rem 1.25rem;
+  overflow: hidden;
+  background: oklch(19% 0.016 330deg);
+  border: 1px solid color-mix(in oklab, var(--light-key) 25%, var(--color-border));
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card), 0 0 80px oklch(85% 0.08 85deg / 10%);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 160ms ease;
+}
+
+.panel-download:hover {
+  border-color: color-mix(in oklab, var(--light-key) 45%, var(--color-border));
+  box-shadow: var(--shadow-card-hover), 0 0 90px oklch(85% 0.08 85deg / 14%);
+}
+
+.panel-download:active {
+  transform: translateY(1px);
+}
+
+.panel-download__icon {
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--color-text);
+}
+
+.panel-download__body {
+  display: grid;
+  gap: 0.125rem;
+  min-width: 0;
+  margin-right: auto;
+}
+
+.panel-download__title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.panel-download__meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+/* 入场券撕线：虚线 + 上下冲孔 */
+.panel-download__perforation {
+  position: relative;
+  align-self: stretch;
+  width: 0;
+  margin-block: -1rem;
+  border-left: 1px dashed color-mix(in oklab, var(--light-key) 28%, var(--color-border));
+}
+
+.panel-download__perforation::before,
+.panel-download__perforation::after {
+  position: absolute;
+  left: 0.5px;
+  width: 0.875rem;
+  height: 0.875rem;
+  content: "";
+  background: var(--color-bg-stage);
+  border: 1px solid color-mix(in oklab, var(--light-key) 25%, var(--color-border));
+  border-radius: 50%;
+}
+
+.panel-download__perforation::before {
+  top: 0;
+  transform: translate(-50%, -50%);
+}
+
+.panel-download__perforation::after {
+  bottom: 0;
+  transform: translate(-50%, 50%);
+}
+
+.panel-download__badge {
+  flex: 0 0 auto;
+  padding: 0.1875rem 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--gel-amber-text);
+  letter-spacing: 0.04em;
+  background: color-mix(in srgb, var(--gel-amber) 14%, transparent);
+  border-radius: var(--radius-sm);
+}
+
+.panel-alternatives {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.875rem;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.875rem;
+  margin: 0;
+  border-top: 1px dashed color-mix(in oklab, var(--color-border) 82%, transparent);
+}
+
+.panel-alternatives__label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+}
+
+.panel-alternatives__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.panel-alternatives__link {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  height: 2.125rem;
+  padding-inline: 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  text-decoration: none;
+  background: color-mix(in oklab, var(--color-surface) 70%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-border) 100%, transparent);
+  border-radius: var(--radius-pill);
+  transition: border-color 140ms ease, color 140ms ease, background-color 140ms ease;
+}
+
+.panel-alternatives__link-arrow {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  transition: color 140ms ease, translate 160ms ease;
+}
+
+.panel-alternatives__link:hover {
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  border-color: color-mix(in oklab, var(--color-primary) 55%, var(--color-border));
+}
+
+.panel-alternatives__link:hover .panel-alternatives__link-arrow {
+  color: var(--color-primary);
+  translate: 0 2px;
+}
+
+.panel-release {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-muted);
+}
+
+.panel-release__sep {
+  opacity: 0.5;
+}
+
+.panel-release__link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, currentcolor 38%, transparent);
+  text-underline-offset: 0.2rem;
+}
+
+.panel-release__link:hover {
+  color: var(--color-primary-hover);
+  text-decoration-color: currentcolor;
+}
+
+.download-button:focus-visible,
+.hero-picker__menu-button:focus-visible,
+.hero-menu__item:focus-visible,
+.panel-platform:focus-visible,
+.panel-download:focus-visible,
+.panel-alternatives__link:focus-visible,
+.panel-release__link:focus-visible,
+.language-menu__item:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+@media (width >= 40rem) {
+  .language-label {
+    display: inline;
+  }
+}
+
+@media (width <= 47.5rem) {
+  .hero-picker,
+  .hero-picker__actions {
+    width: 100%;
+  }
+
+  .hero-picker__download {
+    flex: 1 1 auto;
+  }
+
+  .hero-menu {
+    right: 0;
+  }
+
+  .panel-platform {
+    padding-inline: 0.75rem;
+  }
+
+  .panel-download {
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+  }
+
+  .panel-download__perforation {
+    margin-block: -0.875rem;
+  }
+
+  .panel-download__perforation,
+  .panel-download__badge {
+    display: none;
+  }
+}

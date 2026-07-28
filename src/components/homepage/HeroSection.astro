@@ -1,0 +1,74 @@
+---
+import HeroDownloadPicker from '~/components/islands/HeroDownloadPicker.svelte'
+import { releasePublishedDate, releaseUrl, releaseVersion, type DownloadOption } from '~/data/downloads'
+import { type HomepageContent } from '~/data/homepage'
+
+interface Props {
+  content: HomepageContent['hero']
+  download: HomepageContent['download']
+  downloadOptions: DownloadOption[]
+}
+
+const { content, download, downloadOptions } = Astro.props
+const accentIndex = content.title.indexOf(content.titleAccent)
+---
+
+<section class="hero-section" aria-labelledby="hero-title">
+  <div class="hero-stage" aria-hidden="true">
+    <div class="hero-stage__truss"></div>
+    <div class="hero-stage__beam"></div>
+    <div class="hero-stage__floor"></div>
+    <div class="hero-stage__side-light hero-stage__side-light--left"></div>
+    <div class="hero-stage__side-light hero-stage__side-light--right"></div>
+  </div>
+
+  <div class="hero-section__inner">
+    <div class="hero-section__copy">
+      <p class="hero-eyebrow" data-reveal data-reveal-distance="16">
+        <span class="hero-eyebrow__dot"></span>
+        {content.kicker}
+      </p>
+      <div class="hero-section__title-reveal" data-reveal data-reveal-delay="0.05">
+        <h1 id="hero-title" class="hero-section__title" data-parallax="hero-title">
+          {
+            accentIndex === -1
+              ? content.title
+              : (
+                  <>
+                    {content.title.slice(0, accentIndex)}
+                    <span class="text-accent">{content.titleAccent}</span>
+                    {content.title.slice(accentIndex + content.titleAccent.length)}
+                  </>
+                )
+          }
+        </h1>
+      </div>
+      <div class="hero-section__lead" data-reveal data-reveal-delay="0.16">
+        {content.lead.map(line => <p>{line}</p>)}
+      </div>
+      <div class="hero-section__actions" data-reveal data-reveal-delay="0.24">
+        <HeroDownloadPicker
+          client:load
+          options={downloadOptions}
+          labels={{ otherPlatforms: download.otherPlatformsLabel }}
+        />
+      </div>
+      <p class="hero-section__meta" data-reveal data-reveal-delay="0.3">
+        <span>{releaseVersion}</span>
+        <span class="hero-section__meta-sep">·</span>
+        <span>
+          {download.releasePublishedLabel}
+          {' '}
+          {releasePublishedDate}
+        </span>
+        <span class="hero-section__meta-sep">·</span>
+        <a
+          class="hero-section__changelog"
+          href={releaseUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >{download.releaseNotesLabel}</a>
+      </p>
+    </div>
+  </div>
+</section>

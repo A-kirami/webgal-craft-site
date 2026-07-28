@@ -1,0 +1,59 @@
+{
+  "name": "webgal-craft-site",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "lint": "pnpm lint:js && pnpm lint:style",
+    "lint:js": "eslint . --max-warnings 0",
+    "lint:js:fix": "eslint . --fix --max-warnings 0",
+    "lint:style": "stylelint \"src/**/*.{css,astro,svelte}\"",
+    "lint:style:fix": "stylelint \"src/**/*.{css,astro,svelte}\" --fix",
+    "lint:fix": "pnpm lint:js:fix && pnpm lint:style:fix",
+    "test": "pnpm test:unit",
+    "test:unit": "vitest run",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/svelte": "^9.0.1",
+    "astro": "^7.1.3",
+    "svelte": "^5.56.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@eslint/js": "^10.0.1",
+    "@iconify-json/lucide": "^1.2.116",
+    "@iconify-json/simple-icons": "^1.2.89",
+    "@iconify-json/solar": "^1.2.5",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@stylistic/stylelint-config": "^5.0.0",
+    "@unocss/astro": "^66.7.5",
+    "@unocss/eslint-config": "^66.7.5",
+    "eslint": "^10.8.0",
+    "eslint-import-resolver-typescript": "^4.4.5",
+    "eslint-plugin-astro": "^3.0.1",
+    "eslint-plugin-import-x": "^4.17.1",
+    "eslint-plugin-svelte": "^3.22.0",
+    "eslint-plugin-unicorn": "^72.0.0",
+    "globals": "^17.8.0",
+    "postcss-html": "^1.8.1",
+    "stylelint": "^17.14.1",
+    "stylelint-config-recess-order": "^7.7.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-declaration-block-no-ignored-properties": "^3.0.0",
+    "stylelint-order": "^8.1.1",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.65.0",
+    "unocss": "^66.7.5",
+    "vitest": "^4.1.10"
+  },
+  "engines": {
+    "node": ">=24.18.0"
+  },
+  "packageManager": "pnpm@9.14.2+sha512.6e2baf77d06b9362294152c851c4f278ede37ab1eba3a55fda317a4a17b209f4dbb973fb250a77abc463a341fcb1f17f17cfa24091c4eb319cda0d9b84278387"
+}

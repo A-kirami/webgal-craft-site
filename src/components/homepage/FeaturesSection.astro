@@ -1,0 +1,52 @@
+---
+import { type HomepageContent } from '~/data/homepage'
+
+import SectionIntro from './SectionIntro.astro'
+
+
+interface Props {
+  content: HomepageContent['features']
+}
+
+const { content } = Astro.props
+const icons = [
+  'i-solar:folder-favourite-bookmark-line-duotone',
+  'i-solar:clapperboard-edit-line-duotone',
+  'i-solar:history-line-duotone',
+  'i-solar:playback-speed-line-duotone',
+  'i-solar:transfer-horizontal-line-duotone',
+  'i-solar:bookmark-line-duotone',
+] as const
+/* 六卡对应品牌火花六色 gel，按内容固定分配 */
+const gels = ['amber', 'rose', 'blue', 'cyan', 'magenta', 'blush'] as const
+const displayOrder = [1, 0, 3, 4, 5, 2] as const
+const revealDelays = [undefined, 0.06, 0.12, 0.06, undefined, 0.06] as const
+---
+
+<section class="homepage-section" id="features" aria-labelledby="features-title">
+  <div class="homepage-section__inner features-section">
+    <div class="features-section__header" data-reveal>
+      <SectionIntro eyebrow={content.pill} title={content.title} titleId="features-title" />
+      <p class="features-section__description">{content.description}</p>
+    </div>
+
+    <div class="feature-grid">
+      {
+        displayOrder.map((itemIndex, displayIndex) => {
+          const item = content.items[itemIndex]
+          return (
+            <article
+              class:list={['feature-card', `feature-card--${gels[itemIndex]}`]}
+              data-reveal
+              data-reveal-delay={revealDelays[displayIndex]}
+            >
+              <span class:list={['feature-card__icon', icons[itemIndex]]} aria-hidden="true"></span>
+              <h3 class="feature-card__title">{item.title}</h3>
+              <p class="feature-card__description">{item.description}</p>
+            </article>
+          )
+        })
+      }
+    </div>
+  </div>
+</section>

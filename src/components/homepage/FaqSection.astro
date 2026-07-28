@@ -1,0 +1,124 @@
+---
+import { type HomepageContent } from '~/data/homepage'
+
+import SectionIntro from './SectionIntro.astro'
+
+
+interface Props {
+  content: HomepageContent['faq']
+}
+
+const { content } = Astro.props
+---
+
+<section class="homepage-section" id="faq" aria-labelledby="faq-title">
+  <div class="homepage-section__inner faq-section">
+    <SectionIntro
+      class="faq-section__intro"
+      eyebrow={content.eyebrow}
+      title={content.title}
+      titleId="faq-title"
+      description={content.description}
+    />
+
+    <div class="faq-list" data-reveal data-reveal-from="right">
+      {content.items.map((item, index) => (
+        <details class="faq-item" open={index === 0}>
+          <summary class="faq-item__question">{item.question}</summary>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-content">
+              {item.answer.map(answer => (
+                <p>
+                  {typeof answer === 'string'
+                    ? answer
+                    : answer.map(part => part.href
+                        ? <a href={part.href} target="_blank" rel="noopener noreferrer">{part.text}</a>
+                        : part.text)}
+                </p>
+              ))}
+            </div>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+function afterAnswerTransition(answer: HTMLElement, callback: () => void) {
+  let finished = false
+  const duration = Number.parseFloat(
+    window.getComputedStyle(answer).getPropertyValue('--faq-transition-duration-ms'),
+  )
+  const fallbackDelay = Number.isFinite(duration) ? duration + 100 : 1000
+
+  const finish = () => {
+    if (finished) {
+      return
+    }
+
+    finished = true
+    answer.removeEventListener('transitionend', handleTransitionEnd)
+    answer.removeEventListener('transitioncancel', handleTransitionEnd)
+    window.clearTimeout(timeoutId)
+    callback()
+  }
+
+  const handleTransitionEnd = (event: TransitionEvent) => {
+    if (event.target === answer && event.propertyName === 'grid-template-rows') {
+      finish()
+    }
+  }
+
+  answer.addEventListener('transitionend', handleTransitionEnd)
+  answer.addEventListener('transitioncancel', handleTransitionEnd)
+  const timeoutId = window.setTimeout(finish, fallbackDelay)
+}
+
+document.querySelectorAll<HTMLDetailsElement>('.faq-item').forEach((details) => {
+  const summary = details.querySelector<HTMLElement>('.faq-item__question')
+  const answer = details.querySelector<HTMLElement>('.faq-item__answer')
+
+  if (!summary || !answer) {
+    return
+  }
+
+  summary.addEventListener('click', (event) => {
+    event.preventDefault()
+
+    if (details.dataset.animating !== undefined) {
+      return
+    }
+
+    details.dataset.animating = ''
+
+    if (prefersReducedMotion.matches) {
+      details.open = !details.open
+      delete details.dataset.animating
+      return
+    }
+
+    if (details.open) {
+      afterAnswerTransition(answer, () => {
+        details.open = false
+        delete details.dataset.closing
+        delete details.dataset.animating
+      })
+      details.dataset.closing = ''
+      return
+    }
+
+    details.dataset.opening = ''
+    details.open = true
+
+    window.requestAnimationFrame(() => {
+      afterAnswerTransition(answer, () => {
+        delete details.dataset.animating
+      })
+      delete details.dataset.opening
+    })
+  })
+})
+</script>

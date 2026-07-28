@@ -1,0 +1,56 @@
+---
+import DownloadPanelPicker from '~/components/islands/DownloadPanelPicker.svelte'
+import { quarkMirrorUrl, releaseUrl, type DownloadOption } from '~/data/downloads'
+import { type HomepageContent } from '~/data/homepage'
+
+interface Props {
+  content: HomepageContent['download']
+  downloadOptions: DownloadOption[]
+  locale: HomepageContent['locale']
+}
+
+const { content, downloadOptions, locale } = Astro.props
+const isShowQuarkMirrorHint = locale === 'zh-Hans'
+---
+
+<section class="homepage-section download-section stage-house" id="download" aria-labelledby="download-title">
+  <div class="download-stage" aria-hidden="true">
+    <div class="download-stage__beam"></div>
+    <div class="download-stage__curtain download-stage__curtain--left"></div>
+    <div class="download-stage__curtain download-stage__curtain--right"></div>
+  </div>
+  <div class="homepage-section__inner download-section__inner">
+    <div class="download-section__header" data-reveal>
+      <h2 id="download-title" class="section-title">{content.title}</h2>
+      <p class="section-description">{content.description}</p>
+    </div>
+
+    <div class="download-section__picker" data-reveal data-reveal-from="scale" data-reveal-delay="0.08">
+      <DownloadPanelPicker
+        client:visible
+        options={downloadOptions}
+        labels={{
+          recommended: content.recommendedLabel,
+          otherPlatforms: content.otherPlatformsLabel,
+          otherVariants: content.otherVariantsLabel,
+          releasePublished: content.releasePublishedLabel,
+          releaseNotes: content.releaseNotesLabel,
+        }}
+        releaseUrl={releaseUrl}
+      />
+    </div>
+
+    {
+      isShowQuarkMirrorHint && (
+        <p class="download-section__mirror-hint">
+          <a
+            class="download-section__mirror-link"
+            href={quarkMirrorUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >下载慢？试试夸克网盘</a>
+        </p>
+      )
+    }
+  </div>
+</section>

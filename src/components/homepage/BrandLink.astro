@@ -1,0 +1,14 @@
+---
+interface Props {
+  href?: string
+  label?: string
+  class?: string
+}
+
+const { href = '#top', label = 'WebGAL Craft', class: className = '' } = Astro.props
+---
+
+<a class:list={['brand-link', className]} href={href} aria-label={label}>
+  <img class="brand-link__mark" src="/webgal-craft-logo.svg" alt="" aria-hidden="true" />
+  <span class="brand-link__wordmark" aria-hidden="true"></span>
+</a>

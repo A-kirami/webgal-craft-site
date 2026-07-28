@@ -1,0 +1,18 @@
+---
+import HomePage from '~/components/pages/HomePage.astro'
+import { getHomepageContent } from '~/data/homepage'
+import { defaultLocale, supportedLocales, type Locale } from '~/data/site'
+import Layout from '~/layouts/Layout.astro'
+
+export function getStaticPaths() {
+  return supportedLocales
+    .filter(locale => locale !== defaultLocale)
+    .map(locale => ({ params: { locale } }))
+}
+
+const content = getHomepageContent(Astro.params.locale as Locale)
+---
+
+<Layout lang={content.locale} title={content.metaTitle} description={content.metaDescription}>
+  <HomePage content={content} pathname={Astro.url.pathname} />
+</Layout>

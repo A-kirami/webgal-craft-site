@@ -1,0 +1,41 @@
+---
+import { type HomepageContent } from '~/data/homepage'
+
+import SectionIntro from './SectionIntro.astro'
+
+
+interface Props {
+  content: HomepageContent['workflow']
+}
+
+const { content } = Astro.props
+const icons = ['i-solar:people-nearby-line-duotone', 'i-solar:chat-line-line-duotone', 'i-solar:plain-3-line-duotone'] as const
+---
+
+<section class="homepage-section" id="workflow" aria-labelledby="workflow-title">
+  <div class="homepage-section__inner">
+    <SectionIntro
+      align="center"
+      class="workflow-section__intro"
+      eyebrow={content.pill}
+      title={content.title}
+      titleId="workflow-title"
+      description={content.description}
+    />
+
+    <ol class="workflow-grid">
+      {content.items.map((item, index) => (
+        <li class="workflow-step" data-reveal data-reveal-delay={index * 0.1}>
+          <div class="workflow-step__frame">
+            <span class="workflow-step__act">{item.act}</span>
+            <span class:list={['workflow-step__icon', icons[index]]} aria-hidden="true"></span>
+          </div>
+          <div class="workflow-step__copy">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
