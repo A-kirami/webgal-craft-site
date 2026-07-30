@@ -3,6 +3,7 @@ import HomePage from '~/components/pages/HomePage.astro'
 import { getHomepageContent } from '~/data/homepage'
 import { defaultLocale, supportedLocales, type Locale } from '~/data/site'
 import Layout from '~/layouts/Layout.astro'
+import { getHomepageStructuredData } from '~/lib/seo'
 
 export function getStaticPaths() {
   return supportedLocales
@@ -11,8 +12,14 @@ export function getStaticPaths() {
 }
 
 const content = getHomepageContent(Astro.params.locale as Locale)
+const structuredData = getHomepageStructuredData(content)
 ---
 
-<Layout lang={content.locale} title={content.metaTitle} description={content.metaDescription}>
+<Layout
+  lang={content.locale}
+  title={content.metaTitle}
+  description={content.metaDescription}
+  structuredData={structuredData}
+>
   <HomePage content={content} pathname={Astro.url.pathname} />
 </Layout>

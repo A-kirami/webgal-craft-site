@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://webgalcraft.com/sitemap-index.xml
+Host: webgalcraft.com

@@ -5,8 +5,8 @@ import { type LocaleContent } from './types'
 export const zhHantLocale = {
   homepage: {
     locale: 'zh-Hant',
-    metaTitle: 'WebGAL Craft｜創想無限，創作無界',
-    metaDescription: 'WebGAL Craft 是面向 WebGAL 創作者的跨平台視覺小說工作室。',
+    metaTitle: 'WebGAL Craft｜跨平台視覺小說製作工具',
+    metaDescription: 'WebGAL Craft 是面向 WebGAL 創作者的免費跨平台視覺小說製作工具，支援視覺化編輯、劇情腳本編排、資源管理、即時預覽與多平台作品匯出。',
     languageLabel: '繁體中文',
     nav: {
       workflow: '創作流程',

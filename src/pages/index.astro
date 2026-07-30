@@ -3,14 +3,17 @@ import HomePage from '~/components/pages/HomePage.astro'
 import { getHomepageContent } from '~/data/homepage'
 import { defaultLocale } from '~/data/site'
 import Layout from '~/layouts/Layout.astro'
+import { getHomepageStructuredData } from '~/lib/seo'
 
 const content = getHomepageContent(defaultLocale)
+const structuredData = getHomepageStructuredData(content)
 ---
 
 <Layout
   lang={content.locale}
   title={content.metaTitle}
   description={content.metaDescription}
+  structuredData={structuredData}
 >
   <HomePage content={content} pathname={Astro.url.pathname} />
 </Layout>

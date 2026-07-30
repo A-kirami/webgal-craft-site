@@ -5,8 +5,8 @@ import { type LocaleContent } from './types'
 export const zhHansLocale = {
   homepage: {
     locale: 'zh-Hans',
-    metaTitle: 'WebGAL Craft｜创想无限，创作无界',
-    metaDescription: 'WebGAL Craft 是面向 WebGAL 创作者的跨平台视觉小说工作室。',
+    metaTitle: 'WebGAL Craft｜跨平台视觉小说制作工具',
+    metaDescription: 'WebGAL Craft 是面向 WebGAL 创作者的免费跨平台视觉小说制作工具，支持可视化编辑、剧情脚本编排、资源管理、实时预览与多平台作品导出。',
     languageLabel: '简体中文',
     nav: {
       workflow: '创作流程',

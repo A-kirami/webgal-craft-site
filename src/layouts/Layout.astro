@@ -8,9 +8,10 @@ interface Props {
   title: string
   description: string
   lang: string
+  structuredData?: Record<string, unknown>
 }
 
-const { title, description, lang } = Astro.props
+const { title, description, lang, structuredData } = Astro.props
 const canonicalUrl = getCanonicalUrl(Astro.url.pathname)
 ---
 
@@ -50,6 +51,7 @@ const canonicalUrl = getCanonicalUrl(Astro.url.pathname)
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta
       name="theme-color"
       content={siteMetadata.themeColors.dark}
@@ -70,6 +72,7 @@ const canonicalUrl = getCanonicalUrl(Astro.url.pathname)
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    {structuredData && <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
     <noscript>
       <style>
         [data-reveal] {

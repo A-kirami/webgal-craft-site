@@ -5,8 +5,8 @@ import { type LocaleContent } from './types'
 export const jaLocale = {
   homepage: {
     locale: 'ja',
-    metaTitle: 'WebGAL Craft｜発想は無限、創作は自由',
-    metaDescription: 'WebGAL Craft は、WebGAL クリエイター向けのクロスプラットフォームなビジュアルノベル制作スタジオです。',
+    metaTitle: 'WebGAL Craft｜無料のビジュアルノベル制作ツール',
+    metaDescription: 'WebGAL Craft は WebGAL クリエイター向けの無料ビジュアルノベル制作ツールです。ビジュアル編集、スクリプト構成、素材管理、リアルタイムプレビュー、Windows・macOS・Linux 向けの書き出しに対応します。',
     languageLabel: '日本語',
     nav: {
       workflow: '制作フロー',

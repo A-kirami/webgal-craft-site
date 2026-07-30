@@ -5,8 +5,8 @@ import { type LocaleContent } from './types'
 export const enLocale = {
   homepage: {
     locale: 'en',
-    metaTitle: 'WebGAL Craft | Imagine without limits, create without boundaries',
-    metaDescription: 'WebGAL Craft is a cross-platform visual novel studio for WebGAL creators.',
+    metaTitle: 'WebGAL Craft | Free Visual Novel Maker and Editor',
+    metaDescription: 'Create WebGAL visual novels with visual editing, script orchestration, asset management, live preview, and cross-platform export for Windows, macOS, and Linux.',
     languageLabel: 'English',
     nav: {
       workflow: 'Workflow',
